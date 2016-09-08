@@ -92,25 +92,24 @@ dependencies {
 ...
 import com.higo.zhangyp.segmented.AndroidSegmentedPackage; // <-- import
 
-public class MainActivity extends FragmentActivity implements DefaultHardwareBackBtnHandler {
+/**
+ * Application class for our application.
+ */
+public class MainApplication extends Application implements ReactApplication {
 
-    private ReactInstanceManager mReactInstanceManager;
-    private ReactRootView mReactRootView;
+  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+    @Override
+    protected boolean getUseDeveloperSupport() {
+      return BuildConfig.DEBUG;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mReactRootView = new ReactRootView(this);
-        mReactInstanceManager = ReactInstanceManager.builder()
-                .setApplication(getApplication())
-                .setBundleAssetName("index.android.bundle")
-                .setJSMainModuleName("index.android")
-                .addPackage(new MainReactPackage())
-                .addPackage(new AndroidSegmentedPackage()) // <-- Register package here
-                .setUseDeveloperSupport(BuildConfig.DEBUG)
-                .setInitialLifecycleState(LifecycleState.RESUMED)
-                .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, "AwesomeProject", null);
-        setContentView(mReactRootView);
+    protected List<ReactPackage> getPackages() {
+      return Arrays.asList(
+          new MainReactPackage(),
+          new AndroidSegmentedPackage()
+      );
     }
+  };
+}
 ...
