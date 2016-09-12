@@ -1,11 +1,14 @@
 'use strict';
 
-var React = require('react-native');
-var { requireNativeComponent, PropTypes, View } = React;
+import React,  { Component, PropTypes } from 'react';
+import {
+    View,
+    requireNativeComponent
+} from 'react-native';
 
 var NativeAndroidSegmented = requireNativeComponent('AndroidSegmented', AndroidSegmented);
 
-class AndroidSegmented extends React.Component {
+class AndroidSegmented extends Component {
   constructor() {
     super();
     this._onChange = this._onChange.bind(this);
